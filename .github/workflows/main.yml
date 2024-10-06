@@ -42,13 +42,17 @@ jobs:
     - id: build
       run: |
         bundle exec rake build
-        sha256sum pkg/*
+        sum="`sha256sum -b pkg/*`"
+        echo "$sum"
+        echo "chksum_${os%%-*}=$sum" >> $GITHUB_OUTPUT
         echo "pkg=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
       if: >-
         ${{
         github.event_name == 'push' &&
         (matrix.ruby == needs.ruby-versions.outputs.latest)
         }}
+      env:
+        os: ${{ matrix.os }}
       shell: bash
     - name: Upload package
       uses: actions/upload-artifact@v4
@@ -58,3 +62,15 @@ jobs:
       if: >-
         steps.build.outputs.pkg &&
         startsWith(matrix.os, 'ubuntu')
+
+  comp:
+    name: ${{ github.workflow }} result
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - run: test "$chksum_ubuntu" = "$chksum_windows"
+        working-directory:
+        shell: bash
+        env:
+          chksum_ubuntu: ${{ needs.build.outputs.chksum_ubuntu }}
+          chksum_windows: ${{ needs.build.outputs.chksum_windows }}
