@@ -47,7 +47,6 @@ jobs:
       if: >-
         ${{
         github.event_name == 'push' &&
-        startsWith(matrix.os, 'ubuntu') &&
         (matrix.ruby == needs.ruby-versions.outputs.latest)
         }}
       shell: bash
@@ -56,4 +55,6 @@ jobs:
       with:
         path: pkg/*.gem
         name: ${{steps.build.outputs.pkg}}-${{matrix.os}}
-      if: steps.build.outputs.pkg
+      if: >-
+        steps.build.outputs.pkg &&
+        startsWith(matrix.os, 'ubuntu')
