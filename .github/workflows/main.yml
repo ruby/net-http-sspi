@@ -33,3 +33,20 @@ jobs:
         bundler-cache: true
     - name: Run the default task
       run: bundle exec rake
+
+    - id: build
+      run: |
+        bundle exec rake build
+        echo "pkg=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
+      if: >-
+        ${{
+        github.event_name == 'push' &&
+        (matrix.ruby == needs.ruby-versions.outputs.latest)
+        }}
+      shell: bash
+    - name: Upload package
+      uses: actions/upload-artifact@v4
+      with:
+        path: pkg/*.gem
+        name: ${{steps.build.outputs.pkg}}
+      if: steps.build.outputs.pkg
