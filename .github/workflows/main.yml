@@ -37,6 +37,7 @@ jobs:
     - id: build
       run: |
         bundle exec rake build
+        sha256sum pkg/*
         echo "pkg=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
       if: >-
         ${{
@@ -48,5 +49,5 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         path: pkg/*.gem
-        name: ${{steps.build.outputs.pkg}}
+        name: ${{steps.build.outputs.pkg}}-${{matrix.os}}
       if: steps.build.outputs.pkg
