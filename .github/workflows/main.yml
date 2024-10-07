@@ -47,7 +47,7 @@ jobs:
         bundle exec rake build
         sum="`sha256sum -b pkg/*`"
         echo "$sum"
-        echo "chksum_${os%%-*}=$sum" >> $GITHUB_OUTPUT
+        echo "chksum_${BUILD_PLATFORM%%-*}=$sum" >> $GITHUB_OUTPUT
         echo "pkg=${GITHUB_REPOSITORY#*/}" >> $GITHUB_OUTPUT
       if: >-
         ${{
@@ -55,7 +55,7 @@ jobs:
         (matrix.ruby == needs.ruby-versions.outputs.latest)
         }}
       env:
-        os: ${{ matrix.os }}
+        BUILD_PLATFORM: ${{ matrix.os }}
       shell: bash
     - name: Upload package
       uses: actions/upload-artifact@v4
