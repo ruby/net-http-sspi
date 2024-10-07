@@ -19,6 +19,9 @@ jobs:
     needs: ruby-versions
     name: CI (${{ matrix.ruby }} / ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
+    outputs:
+      chksum_ubuntu:  ${{ steps.build.outputs.chksum_ubuntu }}
+      chksum_windows: ${{ steps.build.outputs.chksum_windows }}
     strategy:
       matrix:
         ruby: ${{ fromJson(needs.ruby-versions.outputs.versions) }}
