@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 Gem::Specification.new do |spec|
-  spec.name = "win32-sspi"
+  spec.name = "net-http-sspi"
   spec.version = "0.0.1"
   spec.authors = ["Justin Bailey"]
   spec.email = ["<jgbailey@gmail.com>"]
@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.summary = %q{Windows SSPI implementation in Ruby}
   spec.description = %q{implements bindings to Win32 SSPI functions, focused on authentication to a proxy server over HTTP.}
   spec.licenses = %w[Ruby BSDL]
-  spec.homepage = "https://github.com/ruby/win32-sspi"
+  spec.homepage = "https://github.com/ruby/net-http-sspi"
   spec.required_ruby_version = ">= 3.0.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
