@@ -1,22 +1,22 @@
-# Win32::SSPI
+# Net::HTTP::SSPI
 
-win32-sspi implements bindings to Win32 SSPI functions, focused on
+net-http-sspi implements bindings to Win32 SSPI functions, focused on
 authentication to a proxy server over HTTP.
 
 ## Installation
 
-win32-sspi is a bundled gem of the ruby standard library, so that the
+net-http-sspi is a bundled gem of the ruby standard library, so that the
 latest version on the ruby release date is preinstalled on Windows.
 Other versions of the gem can be installed in addition like so:
 
 Install the gem and add to the application's Gemfile by executing:
 
-    $ bundle add win32-sspi
+    $ bundle add net-http-sspi
 
 If bundler is not being used to manage dependencies, install the gem
 by executing:
 
-    $ gem install win32-sspi
+    $ gem install net-http-sspi
 
 ## Usage
 
@@ -47,4 +47,4 @@ tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 Bug reports and pull requests are welcome on [GitHub].
 
-[GitHub]: https://github.com/ruby/win32-sspi
+[GitHub]: https://github.com/ruby/net-http-sspi
